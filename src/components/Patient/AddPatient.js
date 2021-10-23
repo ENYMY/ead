@@ -25,7 +25,7 @@ function AddPatient() {
         contactNumber: values.contactNumber,
         address: `${values.number},${values.street} ${values.city}`,
         admissionDescription: values.description,
-      });
+      }).then((res) => alert(res.data));
     },
   });
   return (

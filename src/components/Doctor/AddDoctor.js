@@ -25,7 +25,7 @@ const AddDoctor = () => {
         contactNumber: values.contactNumber,
         address: `${values.number},${values.street} ${values.city}`,
         description: values.description,
-      });
+      }).then((res) => alert(res.data));
     },
   });
   return (

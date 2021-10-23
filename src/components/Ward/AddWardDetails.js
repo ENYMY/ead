@@ -11,8 +11,7 @@ function AddWardDetails() {
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
-      addWard({})
-      
+      addWard(values).then((res) => alert(res.data));
     },
   });
   return (

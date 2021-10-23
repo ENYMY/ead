@@ -1,16 +1,22 @@
-import React from "react";
-import { Grid, Box, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Grid } from "@mui/material";
 import WardDetails from "./WardDetails";
-const wards = [1, 2, 3, 4, 5];
+import { viewAllWard } from "../../services/ward-service";
 
 function ViewWardDetail() {
+  const [wards, setWards] = useState(undefined);
+  useEffect(() => {
+    viewAllWard().then((res) => setWards(res.data));
+  }, []);
   return (
     <Grid container justifyContent='center'>
       <Grid item>
-        <Grid container>
-          {wards.map((ward) => (
-            <WardDetails ward={ward} key={ward} />
-          ))}
+        <Grid container direction='column' spacing={3}>
+          {wards === undefined ? (
+            <Grid item>No elements yet</Grid>
+          ) : (
+            wards.map((ward) => <WardDetails ward={ward} key={ward.id} />)
+          )}
         </Grid>
       </Grid>
     </Grid>

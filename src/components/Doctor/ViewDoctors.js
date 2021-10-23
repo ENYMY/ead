@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import DoctorDetails from "./DoctorDetails";
-const doctors = [1, 2, 3, 4, 5];
+import { viewAllDoctor } from "../../services/doctor-service";
 
 function ViewDoctors() {
+  const [doctors, setDoctors] = useState(undefined);
+  useEffect(() => {
+    viewAllDoctor().then((res) => setDoctors(res.data));
+  }, []);
   return (
     <Grid container justifyContent='center'>
       <Grid item>
-        <Grid container>
-          {doctors.map((doctor) => (
-            <DoctorDetails doctor={doctor} key={doctor} />
-          ))}
+        <Grid container direction='column' spacing={3}>
+          {doctors === undefined ? (
+            <Grid item>No elements yet</Grid>
+          ) : (
+            doctors.map((doctor) => (
+              <DoctorDetails doctor={doctor} key={doctor} />
+            ))
+          )}
         </Grid>
       </Grid>
     </Grid>
